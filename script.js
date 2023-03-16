@@ -13,3 +13,16 @@ const apiUrls = [
 ];
 
 // You can write your code here
+
+function promiseAll() {
+  const promises = apiUrls.map((url) => fetch(url));
+  
+  Promise.all(promises)
+    .then((responses) => Promise.all(responses.map((response) => response.json())))
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
